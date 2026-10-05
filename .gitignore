@@ -1,1 +1,21 @@
-/node_modules
+# Dependencies
+node_modules/
+
+# Cloudflare Wrangler Build- & State-Dateien
+.wrangler/
+
+# Umgebungsvariablen & Secrets
+.env
+.env.*
+!.env.example
+.dev.vars
+
+# Build-Outputs (falls TS-Build oder Bundling nach dist/ geht)
+dist/
+
+# OS- & Editor-Dateien
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
