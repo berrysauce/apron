@@ -1,12 +1,23 @@
 import { Hono } from 'hono'
 import { cache } from 'hono/cache'
 import { proxy } from 'hono/proxy'
+import { bearerAuth } from 'hono/bearer-auth'
 
 type Bindings = {
+  API_KEY: string
   IF_LIVE_API_KEY: string
 }
 
 const app = new Hono<{ Bindings: Bindings }>()
+
+app.use(
+  '/api/*',
+  bearerAuth({
+    verifyToken: async (token, c) => {
+		return token === (c.env as Bindings | undefined)?.API_KEY
+    },
+  })
+)
 
 app.get(
 	'/api/live/*',
